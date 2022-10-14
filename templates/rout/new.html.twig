@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Rout
+{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-6 mx-auto">
+
+			<h1>Nouvelle Route</h1>
+
+			{{ form_start(form) }}
+			{{ form_widget(form) }}
+			<div class="modal-footer">
+				<a href="{{ path('app_rout_index') }}" class="btn btn-secondary">Retour</a>
+				<button class="btn btn-theme" formnovalidate>{{ button_label|default('Enregistré') }}</button>
+			</div>
+			{{ form_end(form) }}
+
+
+		</div>
+	</div>
+{% endblock %}
+{% block javascripts %}
+
+	<script>
+		var $application = $('#rout_Appli');
+// When application gets selected ...
+$application.change(function () { // ... retrieve the corresponding form.
+var $form = $(this).closest('form');
+// Simulate form data, but only include the selected application value.
+var data = {};
+data[$application.attr('name')] = $application.val();
+// Submit data via AJAX to the form's action path.
+$.ajax({
+url: $form.attr('action'),
+type: $form.attr('method'),
+data: data,
+complete: function (html) { $('#rout_control').replaceWith($(html.responseText).find('#rout_control'));
+}
+});
+});
+	</script>
+
+
+{% endblock %}
+

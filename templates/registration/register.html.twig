@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-6 mx-auto">
+    <h1>Register</h1>
+
+    {{ form_start(registrationForm) }}
+<div class="form-row">
+	<div class="form-group col-md-6" style="display:inline-block">
+		{{ form_row(registrationForm.Nom) }}
+		<div id="itemDetailsItemNumberSuggestionsDiv" ></div>
+	</div>
+	<div class="form-group col-md-6">
+		{{ form_row(registrationForm.Prenom) }}
+	</div>
+</div>
+
+        
+        
+        {{ form_row(registrationForm.cin) }}
+        {{ form_row(registrationForm.Mail) }}
+        {{ form_row(registrationForm.Contact) }}
+        {{ form_row(registrationForm.password, {
+            label: 'Password'
+        }) }}
+        {{ form_row(registrationForm.agreeTerms) }}
+        <div class="modal-footer">
+        <button type="submit" class="btn btn-secondary">Inscription</button>
+        </div>
+    {{ form_end(registrationForm) }}
+   </div>
+</div>
+{% endblock %}

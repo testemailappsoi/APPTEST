@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Control index{% endblock %}
+
+{% block body %}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+	<h1 class="h3 mb-0 text-gray-800">Liste des Controlleurs</h1>
+
+	{% if is_granted('ROLE_USER') %}
+		<a href="{{ path('app_control_new') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+			<i class="fas fa-plus-circle fa-sm text-white-50"></i>
+			Nouveau</a>
+
+	{% endif %}
+</div>
+<div class="card shadow mb-4">
+	<div class="card-body">
+		<div class="table-responsive">
+			<table id="datatable" class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Controlleur</th>
+						<th>Application</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for control in controls %}
+						<tr>
+							<td>{{ control.NomCont }}</td>
+							<td>{{ control.Appli }}</td>
+							<td>
+                                <a href="{{ path('app_control_show', {'id': control.id}) }}"class="btn btn-info btn-circle btn-sm">
+                                        <i class="fas fa-info-circle"></i></a>
+								<a href="{{ path('app_control_edit', {'id': control.id}) }}" class="btn btn-primary btn-circle btn-sm">
+                                        <i class="fa fa-pen"></i></a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="3">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

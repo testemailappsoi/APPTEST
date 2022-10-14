@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Question
+{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-6 mx-auto">
+
+			<h1>Votre Question</h1>
+
+			{{ form_start(form) }}
+			{{ form_widget(form) }}
+
+			<div class="modal-footer">
+				<a href="{{ path('app_reponse_index') }}" class="btn btn-outline-secondary">Retour FAQ</a>
+				<button class="btn btn-theme" formnovalidate>{{ button_label|default('Enregistré') }}</button>
+			</div>
+			{{ form_end(form) }}
+		</div>
+	</div>
+
+
+{% endblock %}
+

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rout
+{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-6 mx-auto">
+
+			<h1>Route</h1>
+
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>Application</th>
+						<td>{{ rout.control.appli }}</td>
+					</tr>
+					<tr>
+						<th>Controller</th>
+						<td>{{ rout.control }}</td>
+					</tr>
+					<tr>
+						<th>NomRout</th>
+						<td>{{ rout.NomRout }}</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="modal-footer">
+				<a href="{{ path('app_rout_index') }}" class="btn btn-secondary">Retour</a>
+				<a class="btn btn-theme" href="{{ path('app_rout_edit', {'id': rout.id}) }}">Modifier</a>
+				{{ include('rout/_delete_form.html.twig') }}
+			</div>
+		</div>
+	</div>
+{% endblock %}
+

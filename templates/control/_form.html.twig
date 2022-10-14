@@ -1,0 +1,8 @@
+{{ form_start(form) }}
+{{ form_widget(form) }}
+<div class="modal-footer">
+	<a href="{{ path('app_control_index') }}" class="btn btn-secondary">Retour</a>
+	<button class="btn btn-theme">{{ button_label|default('Enregistré') }}</button>
+</div>
+{{ form_end(form) }}
+

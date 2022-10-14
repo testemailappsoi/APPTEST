@@ -1,0 +1,22 @@
+vich_uploader:    
+    db_driver: orm
+    metadata:
+        type: attribute
+
+    mappings:
+       question_image:
+           uri_prefix: /images/questions
+           upload_destination: '%kernel.project_dir%/public/images/questions'
+           namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+           
+           inject_on_load: false
+           delete_on_update: true
+           delete_on_remove: true 
+       Reponse_image:
+           uri_prefix: /images/questions/reponse
+           upload_destination: '%kernel.project_dir%/public/images/questions/reponse'
+           namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+           
+           inject_on_load: false
+           delete_on_update: true
+           delete_on_remove: true

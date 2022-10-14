@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reponse{% endblock %}
+
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-6 mx-auto">
+			<h1>Modifier FAQ</h1>
+
+			{{ form_start(form) }}
+			{{ form_row(form.Question) }}
+			{{ form_row(form.FAQ) }}
+			{{ form_row(form.Solution) }}
+			<div class="modal-footer">
+            <a href="{{ path('app_responsable_terminé') }}" class="btn btn-secondary">Retour</a>
+            <button class="btn btn-theme"formnovalidate>{{ button_label|default('Modifier') }}</button>
+    </div>
+			{{ form_end(form) }}
+		</div>
+	</div>
+ </div>   
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register
+{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-6 mx-auto">
+			<h1>Question à Envoyer</h1>
+			
+			{# envoi email avec formspree : https://formspree.io/forms/xqkjlwnp/integration #}
+			
+			<form class="contact-form php-mail-form" role="form" action="https://formspree.io/f/xqkjlwnp" method="POST">
+
+              
+              <div class="form-group">
+                <input type="email" name="email" class="form-control" id="contact-email" placeholder="Votre Email" data-rule="email" data-msg="Please enter a valid email">
+                <div class="validate"></div>
+              </div>
+
+              <div class="form-group">
+                <textarea class="form-control" name="message" id="contact-message" placeholder="Votre Message" rows="4" data-rule="required" data-msg="Please write something for us"></textarea>
+                <div class="validate"></div>
+              </div>
+
+              <div class="loading"></div>
+              <div class="error-message"></div>
+              <div class="sent-message">Your message has been sent. Thank you!</div>
+
+              <div class="form-send">
+                <button type="submit" class="btn btn-large btn-primary">Envoyer Message</button>
+              </div>
+
+            </form>
+		</div>
+	</div>
+{% endblock %}
+

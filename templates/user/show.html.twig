@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil
+{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-6 mx-auto">
+
+			<h1>Profil
+			</h1>
+
+			<table class="table">
+				<tbody>
+
+					<tr>
+						<th>Nom</th>
+						<td>{{ user.Nom}}</td>
+					</tr>
+					<tr>
+						<th>Prenom</th>
+						<td>{{ user.Prenom}}</td>
+					</tr>
+					<tr>
+						<th>Cin</th>
+						<td>{{ user.Cin }}</td>
+					</tr>
+					<tr>
+						<th>Cin</th>
+						<td>{{ user.Mail}}</td>
+					</tr>
+					<tr>
+						<th>Contact</th>
+						<td>{{ user.Contact}}</td>
+					</tr>
+					<tr>
+						<th>Roles</th>
+						<td>
+							{% for roles in user.roles %}
+								{% if roles == "ROLE_ADMIN" %}
+									Administrateur
+								{% elseif roles == "ROLE_USER" %}
+									Utilisateur
+								{% elseif roles == "ROLE_REP" %}
+									Responsable
+								{% elseif roles == "ROLE_UAPP" %}
+									Autre
+								{% endif %}
+
+							{% endfor %}
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+
+			<div class="modal-footer">
+				<a href="{{ path('app_user_edit') }}" class="btn btn-theme">
+					<i class="fas fa-fw fa-edit"></i>
+					Modifier</a>
+			</div>
+
+		</div>
+	</div>
+{% endblock %}
+

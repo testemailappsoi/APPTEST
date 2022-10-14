@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rout index{% endblock %}
+
+{% block body %}
+<!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Liste des Routes</h1>
+				
+				{% if is_granted('ROLE_USER') %}
+                    <a href="{{ path('app_rout_new') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+					<i class="fas fa-plus-circle fa-sm text-white-50"></i> Nouveau</a>
+                    
+				{% endif %}
+        </div>
+
+    <table id ="datatable" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>NomRout</th>
+                <th>Application</th>
+                <th>Controller</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rout in routs %}
+            <tr>
+                <td>{{ rout.NomRout }}</td>
+                <td>{{ rout.control.appli.NomApp }}</td>
+                <td>{{ rout.control }}</td>
+                <td>
+					<a href="{{ path('app_rout_show', {'id': rout.id}) }}"class="btn btn-info btn-circle btn-sm">
+                        <i class="fas fa-info-circle"></i></a>
+					<a href="{{ path('app_rout_edit', {'id': rout.id}) }}" class="btn btn-primary btn-circle btn-sm">
+                        <i class="fa fa-pen"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+{% endblock %}

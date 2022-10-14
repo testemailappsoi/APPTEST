@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Control index{% endblock %}
+
+{% block body %}
+    <h1>Question index</h1>
+
+    <table id ="datatable" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Utilisateur</th>
+                <th>Question</th>
+                <th>Fonctionnalite</th>
+                <th>Responsable</th>
+                <th>Reponse</th>
+                <th>Date d'Ajout</th>
+                <th>Date de modification</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for question in questions %}
+            {% if question.Reponse %}
+            <tr>
+                <td>{{ question.User }} {{ question.User.Prenom }}</td>
+                <td>{{ question.Question }}</td>
+                <td>{{ question.Fonc }}</td>
+                <td>{{ question.Responsable }}</td>
+                <td>{{ question.Reponse }}</td>
+                <td>{{ question.DateQuest ? question.DateQuest|date('H:i | d-m-Y') : '' }}</td>
+                <td>{{ question.updateAt ? question.updateAt|date('H:i | d-m-Y') : '' }}</td>
+               
+            </tr>
+             {% endif %}
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

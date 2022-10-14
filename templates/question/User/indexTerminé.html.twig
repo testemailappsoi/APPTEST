@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vos questions Terminés
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="d-sm-flex align-items-center justify-content-between mb-4">
+			<h1 class="h3 mb-0 text-gray-800">Vos questions Terminé
+			</h1>
+		</div>
+		<div class="row mt">
+			<div class="col-md-12">
+				<section class="task-panel tasks-widget">
+
+					<div class="panel-body">
+						<div class="task-content">
+							<ul class="task-list">
+								{% for question in app.user.questions %}
+									{% if question.Finished %}
+										<li>
+											<div class="task-checkbox">
+												<i class=" fa fa-ellipsis-v"></i>
+											</div>
+											<div class="task-title">
+												<span class="task-title-sp">{{ question.Question }}</span>
+												{% if question.FAQ %}
+													<span class="badge bg-success">Dans FAQ</span>
+												{% endif %}
+												{% if question.Fonc %}
+													<span class="badge bg-theme ">{{ question.fonc.rout.control.appli.NomApp }}</span>
+												{% endif %}
+												<div class="float-right hidden-phone">
+													<a class="btn btn-info btn-circle btn-sm" href="{{ path('app_question_show', {'id': question.id}) }}">
+														<i class="fas fa-eye"></i>
+													</a>
+												</div>
+											</div>
+										</li>
+
+									{% endif %}
+								{% else %}
+									<h2>
+										vide
+									</h2>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</section>
+			</div>
+			<!-- /col-md-12-->
+		</div>
+	</div>
+{% endblock %}
+

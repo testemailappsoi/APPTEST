@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User
+{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-6 mx-auto">
+
+			<h1>Modifier Profil</h1>
+
+			{{ form_start(form) }}
+			{{ form_widget(form) }}
+
+			<div class="modal-footer">
+				<a href="{{ path('app_user_show') }}" class="btn btn-secondary">Retour au Profil</a>
+				<button class="btn btn-theme">{{ button_label|default('Modifier') }}</button>
+			</div>
+			{{ form_end(form) }}
+		</div>
+	</div>
+{% endblock %}
+
