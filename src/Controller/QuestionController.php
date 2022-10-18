@@ -11,6 +11,8 @@ use App\Form\QuestType;
 use App\Form\ReponseType;
 use App\Form\SearchQuestionType;
 use App\Repository\QuestionRepository;
+use App\Service\MailerService;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,6 +56,22 @@ class QuestionController extends AbstractController
     public function ResponsableSansReponse(QuestionRepository $questionRepository): Response
     {
         return $this->render('question/responsable/indexSansReponse.html.twig', [
+            'questions' => $questionRepository->findBy(['Finished' => false], ['updateAt' => 'DESC'])
+        ]);
+    }
+
+    #[Route('/Responsable/Question/SansRep', name: 'app_responsable_QSR_index', methods: ['GET'])]
+    public function FiltreSansReponse(QuestionRepository $questionRepository): Response
+    {
+        return $this->render('question/responsable/indexFiltreSansReponse.html.twig', [
+            'questions' => $questionRepository->findBy(['Finished' => false], ['updateAt' => 'DESC'])
+        ]);
+    }
+
+    #[Route('/Responsable/VosQuestion', name: 'app_responsable_concerner_index', methods: ['GET'])]
+    public function ResponsableConcerner(QuestionRepository $questionRepository): Response
+    {
+        return $this->render('question/responsable/indexQuestionResponsable.html.twig', [
             'questions' => $questionRepository->findBy(['Finished' => false], ['updateAt' => 'DESC'])
         ]);
     }
@@ -173,15 +191,25 @@ class QuestionController extends AbstractController
         ]);
     }
 
+    // reponse du Résponsable
     #[Route('/{id}/solution', name: 'app_question_solution', methods: ['GET', 'POST'])]
-    public function Solution(Request $request, Question $question, QuestionRepository $questionRepository): Response
+    public function Solution(Request $request, Question $question, QuestionRepository $questionRepository, MailerInterface $mailer): Response
     {
         $question->setResponsable($this->getUser());
         $form = $this->createForm(ReponseType::class, $question);
         $form->handleRequest($request);
+        $usermail = $this->getUser()->getMail() ;
         if ($form->isSubmitted() && $form->isValid()) {
+
             try {
                 $questionRepository->add($question, true);
+                $email = (new TemplatedEmail())
+                ->from('testemailappsoi2@gmail.com')
+                ->to($usermail)
+                ->subject('AppSoi Gestion Incident')
+                ->html('<p>votre question avec la référence</p>' . $question->getId() . '<p>a été répondue</p>');
+
+                $mailer->send($email);
                 $this->addFlash('success', 'ajout avec succès');
                 return $this->redirectToRoute('app_responsable_index', [], Response::HTTP_SEE_OTHER);
             } catch (\Exception $e) {
@@ -226,34 +254,30 @@ class QuestionController extends AbstractController
 
     //envoi de mail
     #[Route('/{id}/mail', name: 'app_responsable_mail', methods: ['GET', 'POST'])]
-    public function QuestionMail(Request $request, Question $question, MailerInterface $mailer): Response
+    public function QuestionMail(Request $request, MailerService $mailerService): Response
     {
-        $question->setResponsable($this->getUser());
-        $form = $this->createForm(MailType::class, $question);
+        
+        $form = $this->createForm(MailType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-               //email
-               $email = (new Email())
-            ->from('testemailappsoi2@gmail.com')
-            ->to('testemailappsoi1@gmail.com')
-            //->cc('cc@example.com')
-            //->bcc('bcc@example.com')
-            //->replyTo('fabien@example.com')
-            //->priority(Email::PRIORITY_HIGH)
-            ->subject('Symfony Mailer!')
-            ->text('Sending emails is fun again!')
-            ->html('<p>See Twig integration for better HTML integration!</p>');
-
-        $mailer->send($email);
+              $data = $form->getData();
+              $mailerService->sendEmail(
+                from: $data['De'],
+                to: $data['Email'] ,
+                subject: $data['Question'],
+                template:"emails/reponse.html.twig",parameters:[
+                    "De" => $data['De'],
+                    "Email" => $data['Email'],
+                    "Question" => $data['Question'], ]
+              );
         $this->addFlash('success', 'Envoyer');
-        // return $this->redirectToRoute('app_responsable_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_responsable_index', [], Response::HTTP_SEE_OTHER);
         } elseif ($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash('error', 'Fausse manipulation');
         }
 
         return $this->renderForm('/question/responsable/mail.html.twig', [
-            'question' => $question,
             'form' => $form,
         ]);
     }
@@ -262,6 +286,7 @@ class QuestionController extends AbstractController
     public function edit(Request $request, Question $question, QuestionRepository $questionRepository): Response
     {
         $question->setUser($this->getUser());
+        $question->setIsRead(false);
         if ($this->isGranted('ROLE_UAPP')) {
             # code...
 

@@ -5,15 +5,15 @@
 {% endblock %}
 {% block body %}
 
-	<div class="container">
-	<!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">FAQ</h1>
-				
-        </div>
-{{ form(form) }}
-		
-		
+	<div
+		class="container">
+		<!-- Page Heading -->
+		<div class="d-sm-flex align-items-center justify-content-between mb-4">
+			<h1 class="h3 mb-0 text-gray-800">FAQ</h1>
+
+		</div>
+		{{ form(form) }}
+
 
 			{% if rechquestions %}
 
@@ -21,30 +21,25 @@
 
 					{% if question.FAQ %}
 
-						<div
-							class="card shadow mb-4">
-							<!-- Card Header - Accordion -->
-							<div class="overflow-hidden border-left-primary" style="width: auto; height: 57px">
-							<a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-								<h6 class="m-0 font-weight-bold text-primary">{{ question.FAQ }}</h6>
-							</a>
-							...</div>
-							<!-- Card Content - Collapse -->
-							<div class="collapse show" id="collapseCardExample">
-								<div class="overflow-auto card-body">
-									{{ question.Solution }}
-
+						<div class="accordion" id="accordion">
+							<div class="accordion-group">
+								<div class="accordion-heading" style="width: auto; height: 57px">
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ question.id }}">
+										<h6 class="m-0 font-weight-bold text-primary">
+											<i class="fas fa-caret-right"></i>
+											{{ question.FAQ }}
+											?</h6>
+									</a>
 								</div>
-								{# <div class="card-footer">
-									<a href="{{ path('app_question_show', {'id': question.id}) }}">Plus</a>
-									{% if is_granted('ROLE_REP') %}
-										<a href="{{ path('app_question_delete', {'id': question.id}) }}">Supprimer</a>
-										<a href="{{ path('app_question_solution', {'id': question.id}) }}">edit</a>
-									{% endif %}
-									<p class=" float-right ">{{ question.updateAt ? question.updateAt|date('H:i | d-m-Y') : '' }}</p>
-								</div> #}
+								<div id="collapse{{ question.id }}" class="accordion-body collapse in">
+									<div class="accordion-inner">
+										<p>{{ question.Solution }}</p>
+									</div>
+								</div>
 							</div>
+
 						</div>
+
 
 					{% endif %}
 
@@ -61,30 +56,25 @@
 
 					{% if question.FAQ %}
 
-						<div
-							class="card shadow mb-4">
-							<!-- Card Header - Accordion -->
-							<div class="overflow-hidden border-left-primary" style="width: auto; height: 57px">
-							<a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button"  aria-controls="collapseCardExample">
-								<h6 class="m-0 font-weight-bold text-primary">{{ question.FAQ }} ?</h6>
-							</a>
-							...</div>
-							<!-- Card Content - Collapse -->
-							<div class="collapse show" id="collapseCardExample">
-								<div class="overflow-auto card-body">
-									{{ question.Solution }}
-
+						<div class="accordion" id="accordion">
+							<div class="accordion-group">
+								<div class="accordion-heading" style="width: auto; height: 50px">
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ question.id }}">
+										<h6 class="m-0 font-weight-bold text-primary">
+											<i class="fas fa-caret-right"></i>
+											{{ question.FAQ }}
+											?</h6>
+									</a>
 								</div>
-								{# <div class="card-footer">
-									<a href="{{ path('app_question_show', {'id': question.id}) }}">Plus</a>
-									{% if is_granted('ROLE_REP') %}
-										<a href="{{ path('app_question_delete', {'id': question.id}) }}">Supprimer</a>
-										<a href="{{ path('app_question_solution', {'id': question.id}) }}">edit</a>
-									{% endif %}
-									<p class=" float-right ">{{ question.updateAt ? question.updateAt|date('H:i | d-m-Y') : '' }}</p>
-								</div> #}
+								<div id="collapse{{ question.id }}" class="accordion-body collapse in">
+									<div class="accordion-inner">
+										<p>{{ question.Solution }}</p>
+									</div>
+								</div>
 							</div>
+
 						</div>
+
 					{% endif %}
 
 

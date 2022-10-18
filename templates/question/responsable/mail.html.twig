@@ -7,10 +7,17 @@
 	<div class="row">
 		<div class="col-6 mx-auto">
 			<h1>Question à Envoyer</h1>
+      {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div class="form-send">
+                <button type="submit" class="btn btn-large btn-primary">Envoyer Message</button>
+              </div>
+     {{ form_end(form) }}
+
 			
-			{# envoi email avec formspree : https://formspree.io/forms/xqkjlwnp/integration #}
+			{# envoi email avec formspree : https://formspree.io/forms/xqkjlwnp/integration  action="https://formspree.io/f/xqkjlwnp"#}
 			
-			<form class="contact-form php-mail-form" role="form" action="https://formspree.io/f/xqkjlwnp" method="POST">
+			{# <form class="contact-form php-mail-form" role="form" method="POST">
 
               
               <div class="form-group">
@@ -23,16 +30,17 @@
                 <div class="validate"></div>
               </div>
 
-              <div class="loading"></div>
-              <div class="error-message"></div>
-              <div class="sent-message">Your message has been sent. Thank you!</div>
-
               <div class="form-send">
                 <button type="submit" class="btn btn-large btn-primary">Envoyer Message</button>
               </div>
 
-            </form>
+            </form> #}
+            
 		</div>
 	</div>
+ 
 {% endblock %}
+
+
+
 

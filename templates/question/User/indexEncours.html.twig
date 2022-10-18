@@ -25,6 +25,9 @@
 								<i class="fa fa-caret-right"></td>
 							</td>
 							<td class="view-message">
+								<a href="{{ path('app_question_detail', {'id': question.id}) }}">{{ question.id }}
+								</td>
+							<td class="view-message">
 								<a href="{{ path('app_question_detail', {'id': question.id}) }}">{{ question.Question }}
 								</td>
 								{% if question.Reponse == null %}
