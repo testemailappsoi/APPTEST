@@ -8,21 +8,21 @@
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
 			<h1 class="h3 mb-0 text-gray-800">Questions
 			</h1>
-            <a href="{{ path('app_responsable_index') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
-					<i class="fas fa-plus-circle fa-sm text-white-50"></i> Retour</a>
+            <a href="{{ path('app_responsable_index') }}" class="d-none d-sm-inline-block btn btn-sm  shadow-sm">
+					 Retour</a>
 		</div>
 
 		<table id="datatable" class="table table-inbox table-hover">
 			<thead style="display:none;">
 				<tr>
+					<th>Référence</th>
+					<th>Nom expéditeur</th>
+					<th>Question</th>
 					<th></th>
 					<th></th>
 					<th></th>
 					<th></th>
-					<th></th>
-					<th></th>
-					<th></th>
-					<th></th>
+					<th>Date</th>
 				</tr>
 			</thead>
 			
@@ -61,7 +61,7 @@
 						</td>
 					{% elseif question.Reponse and question.isRead == null  %}
 						<td>
-							<span class="badge bg-warning float-right">Modifier</span>
+							<span class="badge bg-important float-right">Modifier</span>
 						</td>
 					{% elseif question.Reponse and question.Finished == null  %}
 						<td>

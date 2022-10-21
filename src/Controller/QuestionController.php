@@ -20,10 +20,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
-#[Route('/question')]
+
 class QuestionController extends AbstractController
 {
-    #[Route('/', name: 'app_question_index', methods: ['GET'])]
+    #[Route('/SansRéponse', name: 'app_question_index', methods: ['GET'])]
     public function index(QuestionRepository $questionRepository): Response
     {
         return $this->render('question/User/indexSansReponse.html.twig', [
@@ -31,7 +31,7 @@ class QuestionController extends AbstractController
         ]);
     }
 
-    #[Route('/Reponse', name: 'app_reponse_index', methods: ['GET', 'POST'])]
+    #[Route('/', name: 'app_reponse_index', methods: ['GET', 'POST'])]
     public function Reponse(QuestionRepository $questionRepository, Request $request): Response
     {
         $rechquestions = $questionRepository->findBy(['FAQ' => true], ['DateQuest' => 'ASC']);
@@ -52,7 +52,7 @@ class QuestionController extends AbstractController
         ]);
     }
 
-    #[Route('/Responsable/SansRep', name: 'app_responsable_index', methods: ['GET'])]
+    #[Route('/question/Responsable/SansRep', name: 'app_responsable_index', methods: ['GET'])]
     public function ResponsableSansReponse(QuestionRepository $questionRepository): Response
     {
         return $this->render('question/responsable/indexSansReponse.html.twig', [
@@ -60,7 +60,7 @@ class QuestionController extends AbstractController
         ]);
     }
 
-    #[Route('/Responsable/Question/SansRep', name: 'app_responsable_QSR_index', methods: ['GET'])]
+    #[Route('/question/Responsable/Question/SansRep', name: 'app_responsable_QSR_index', methods: ['GET'])]
     public function FiltreSansReponse(QuestionRepository $questionRepository): Response
     {
         return $this->render('question/responsable/indexFiltreSansReponse.html.twig', [
@@ -68,7 +68,7 @@ class QuestionController extends AbstractController
         ]);
     }
 
-    #[Route('/Responsable/VosQuestion', name: 'app_responsable_concerner_index', methods: ['GET'])]
+    #[Route('/question/Responsable/VosQuestion', name: 'app_responsable_concerner_index', methods: ['GET'])]
     public function ResponsableConcerner(QuestionRepository $questionRepository): Response
     {
         return $this->render('question/responsable/indexQuestionResponsable.html.twig', [
@@ -76,7 +76,7 @@ class QuestionController extends AbstractController
         ]);
     }
 
-    #[Route('/Responsable/terminé', name: 'app_responsable_terminé', methods: ['GET'])]
+    #[Route('/question/Responsable/terminé', name: 'app_responsable_terminé', methods: ['GET'])]
     public function ResponsableTerminé(QuestionRepository $questionRepository): Response
     {
         return $this->render('question/responsable/indexterminé.html.twig', [
@@ -84,7 +84,7 @@ class QuestionController extends AbstractController
         ]);
     }
 
-    #[Route('/Repondue', name: 'app_question_repondue', methods: ['GET'])]
+    #[Route('/question/Repondue', name: 'app_question_repondue', methods: ['GET'])]
     public function Repondue(QuestionRepository $questionRepository): Response
     {
         return $this->render('question/User/indexTerminé.html.twig', [
@@ -92,7 +92,7 @@ class QuestionController extends AbstractController
         ]);
     }
 
-    #[Route('/EnCours', name: 'app_question_en_cours', methods: ['GET'])]
+    #[Route('/question/EnCours', name: 'app_question_en_cours', methods: ['GET'])]
     public function Encours(QuestionRepository $questionRepository): Response
     {
         return $this->render('question/User/indexEncours.html.twig', [
@@ -100,7 +100,7 @@ class QuestionController extends AbstractController
         ]);
     }
 
-    #[Route('/index', name: 'app_question_indexG', methods: ['GET'])]
+    #[Route('/question/index', name: 'app_question_indexG', methods: ['GET'])]
     public function IndexG(QuestionRepository $questionRepository): Response
     {
         return $this->render('question/indexgeneral.html.twig', [
@@ -108,7 +108,7 @@ class QuestionController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_question_new', methods: ['GET', 'POST'])]
+    #[Route('/question/new', name: 'app_question_new', methods: ['GET', 'POST'])]
     public function new(Request $request, QuestionRepository $questionRepository): Response
     {
         $question = new Question();
@@ -124,7 +124,7 @@ class QuestionController extends AbstractController
                 try {
                     $questionRepository->add($question, true);
                     $this->addFlash('success', 'ajout avec succès');
-                    
+
                     return $this->redirectToRoute('app_question_en_cours', [], Response::HTTP_SEE_OTHER);
                 } catch (\Exception $e) {
                     $this->addFlash('warning', 'erreur. Vérifier s"il vous plaît !');
@@ -160,7 +160,7 @@ class QuestionController extends AbstractController
         }
     }
 
-    #[Route('/{id}/voir', name: 'app_question_show', methods: ['GET'])]
+    #[Route('/question/{id}/voir', name: 'app_question_show', methods: ['GET'])]
     public function show(Question $question): Response
     {
         $question->setUser($this->getUser());
@@ -170,7 +170,7 @@ class QuestionController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/Responsable', name: 'app_question_showResponsable', methods: ['GET'])]
+    #[Route('/question/{id}/Responsable', name: 'app_question_showResponsable', methods: ['GET'])]
     public function showResponsable(Question $question, QuestionRepository $questionRepository): Response
     {
         # code...
@@ -181,7 +181,7 @@ class QuestionController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_question_detail', methods: ['GET'])]
+    #[Route('/question/{id}', name: 'app_question_detail', methods: ['GET'])]
     public function Detail(Question $question): Response
     {
 
@@ -192,22 +192,22 @@ class QuestionController extends AbstractController
     }
 
     // reponse du Résponsable
-    #[Route('/{id}/solution', name: 'app_question_solution', methods: ['GET', 'POST'])]
+    #[Route('/question/{id}/solution', name: 'app_question_solution', methods: ['GET', 'POST'])]
     public function Solution(Request $request, Question $question, QuestionRepository $questionRepository, MailerInterface $mailer): Response
     {
         $question->setResponsable($this->getUser());
         $form = $this->createForm(ReponseType::class, $question);
         $form->handleRequest($request);
-        $usermail = $this->getUser()->getMail() ;
+        $usermail = $this->getUser()->getMail();
         if ($form->isSubmitted() && $form->isValid()) {
 
             try {
                 $questionRepository->add($question, true);
                 $email = (new TemplatedEmail())
-                ->from('testemailappsoi2@gmail.com')
-                ->to($usermail)
-                ->subject('AppSoi Gestion Incident')
-                ->html('<p>votre question avec la référence</p>' . $question->getId() . '<p>a été répondue</p>');
+                    ->from('testemailappsoi2@gmail.com')
+                    ->to($usermail)
+                    ->subject('AppSoi Gestion Incident')
+                    ->html('<p>votre question avec la référence</p>' . $question->getId() . '<p>a été répondue</p>');
 
                 $mailer->send($email);
                 $this->addFlash('success', 'ajout avec succès');
@@ -226,17 +226,24 @@ class QuestionController extends AbstractController
     }
 
     //Envoi vers autre responsable
-    #[Route('/{id}/Cresponsable', name: 'app_question_Cresponsable', methods: ['GET', 'POST'])]
-    public function AddResponsablereponse(Request $request, Question $question, QuestionRepository $questionRepository): Response
+    #[Route('/question/{id}/Cresponsable', name: 'app_question_Cresponsable', methods: ['GET', 'POST'])]
+    public function AddResponsablereponse(Request $request, Question $question, QuestionRepository $questionRepository, MailerInterface $mailer): Response
     {
-        
+
         $form = $this->createForm(ChoixResponsableType::class, $question);
         $form->handleRequest($request);
-       
+        $Rmail = $question->getResponsable($this->getUser())->getMail();
         if ($form->isSubmitted() && $form->isValid()) {
             try {
                 $questionRepository->add($question, true);
-                $this->addFlash('success', 'ajout avec succès');
+                $email = (new TemplatedEmail())
+                    ->from('testemailappsoi2@gmail.com')
+                    ->to($Rmail)
+                    ->subject('AppSoi Gestion Incident')
+                    ->html('<p>Vous devez répondre au Question qui a la référence</p>' . $question->getId());
+
+                $mailer->send($email);
+                $this->addFlash('success', 'Envoyé');
                 $this->addFlash('vous', 'Une question vous est adrresser');
                 return $this->redirectToRoute('app_responsable_index', [], Response::HTTP_SEE_OTHER);
             } catch (\Exception $e) {
@@ -253,26 +260,28 @@ class QuestionController extends AbstractController
     }
 
     //envoi de mail
-    #[Route('/{id}/mail', name: 'app_responsable_mail', methods: ['GET', 'POST'])]
+    #[Route('/question/{id}/mail', name: 'app_responsable_mail', methods: ['GET', 'POST'])]
     public function QuestionMail(Request $request, MailerService $mailerService): Response
     {
-        
+
         $form = $this->createForm(MailType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-              $data = $form->getData();
-              $mailerService->sendEmail(
+            $data = $form->getData();
+            $mailerService->sendEmail(
                 from: $data['De'],
-                to: $data['Email'] ,
+                to: $data['Email'],
                 subject: $data['Question'],
-                template:"emails/reponse.html.twig",parameters:[
+                template: "emails/reponse.html.twig",
+                parameters: [
                     "De" => $data['De'],
                     "Email" => $data['Email'],
-                    "Question" => $data['Question'], ]
-              );
-        $this->addFlash('success', 'Envoyer');
-        return $this->redirectToRoute('app_responsable_index', [], Response::HTTP_SEE_OTHER);
+                    "Question" => $data['Question'],
+                ]
+            );
+            $this->addFlash('success', 'Envoyer');
+            return $this->redirectToRoute('app_responsable_index', [], Response::HTTP_SEE_OTHER);
         } elseif ($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash('error', 'Fausse manipulation');
         }
@@ -282,7 +291,7 @@ class QuestionController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_question_edit', methods: ['GET', 'POST'])]
+    #[Route('/question/{id}/edit', name: 'app_question_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Question $question, QuestionRepository $questionRepository): Response
     {
         $question->setUser($this->getUser());
@@ -367,7 +376,7 @@ class QuestionController extends AbstractController
     }
 
     // ajout du FAQ
-    #[Route('/{id}/FAQ', name: 'app_question_FAQ', methods: ['GET', 'POST'])]
+    #[Route('/question/{id}/FAQ', name: 'app_question_FAQ', methods: ['GET', 'POST'])]
     public function FAQ(Request $request, Question $question, QuestionRepository $questionRepository): Response
     {
         $question->setResponsable($this->getUser());
@@ -394,7 +403,7 @@ class QuestionController extends AbstractController
     }
 
     // Modifier FAQ
-    #[Route('/{id}/FAQ/Modifier', name: 'app_question_FAQ_Update', methods: ['GET', 'POST'])]
+    #[Route('/question/{id}/FAQ/Modifier', name: 'app_question_FAQ_Update', methods: ['GET', 'POST'])]
     public function FAQ_Edit(Request $request, Question $question, QuestionRepository $questionRepository): Response
     {
         $question->setResponsable($this->getUser());

@@ -35,7 +35,8 @@ class UserType extends AbstractType
                 ],
                 
             ] )
-            ->add('Email', TypeTextType::class , [
+            ->add('Mail', TypeTextType::class , [
+                'label' => 'Email',
                 'constraints' => new NotBlank(['message' => 'saisir votre Email.'])
             ]) 
             ->add('Contact', TelType::class , [

@@ -2,13 +2,9 @@
 
 namespace App\Form;
 
-// use App\Entity\Question;
-use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType as TypeTextType;
 
@@ -26,11 +22,11 @@ class MailType extends AbstractType
                 'constraints' => new NotBlank(['message' => 'Veillez soumettre votre question.'] )
             ] )
             ->add('De', TypeTextType::class, [
-                'label' => 'Votre Email',
+                'label' => 'De (email)',
                 'constraints' => new NotBlank(['message' => 'Votre Email.'] )
             ] )
             ->add('Email', TypeTextType::class, [
-                'label' => 'Email',
+                'label' => 'à (email)',
                 'constraints' => new NotBlank(['message' => 'Votre Email.'] )
             ] )
                 ;

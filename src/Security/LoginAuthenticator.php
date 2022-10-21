@@ -30,12 +30,12 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
 
     public function authenticate(Request $request): Passport
     {
-        $cin = $request->request->get('cin', '');
+        $Cin = $request->request->get('Cin', '');
 
-        $request->getSession()->set(Security::LAST_USERNAME, $cin);
+        $request->getSession()->set(Security::LAST_USERNAME, $Cin);
 
         return new Passport(
-            new UserBadge($cin),
+            new UserBadge($Cin),
             new PasswordCredentials($request->request->get('password', '')),
             [
                 new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
@@ -51,7 +51,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
 
         // For example:
         return new RedirectResponse($this->urlGenerator->generate('app_reponse_index'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
     protected function getLoginUrl(Request $request): string

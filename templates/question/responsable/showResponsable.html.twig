@@ -5,146 +5,175 @@
 
 {% block body %}
 
-<div class="row">
-	<div class="col-6 mx-auto">
-		<div class="panel-body ">
-			<div class="mail-header row">
-				<div class="col-md-8">
-					<h4 class="pull-left">
-						Question
-					</h4>
+	<div class="col-sm-11">
+		<section class="panel">
+			<header class="panel-heading wht-bg">
+				<h4 class="gen-case">
+					Question
+				</h4>
+			</header>
+			<div class="panel-body ">
+				<div class="mail-sender">
+					<div class="row">
+						<div class="col-md-8">
+							<img src="img/ui-zac.jpg" alt="">De
+							<strong class="text-primary">{{ question.User }}
+								{{ question.User.Prenom }}</strong>
+							<span>[{{question.User.Mail}}]</span>
+						</div>
+						<div class="col-md-4">
+							<p class="date">Le
+								{% if question.updateAt %}
+									{{ question.updateAt ? question.updateAt|date('d-m-Y à H:i') : '' }}
+								{% else %}
+									{{ question.DateQuest ? question.DateQuest|date('d-m-Y à H:i') : '' }}
+								{% endif %}
+							</p>
+							<p class="contact float-right">
+								<i class="fas fa-fw fa-mobile"></i>:{{ question.User.Contact }}
+							</p>
+						</div>
+					</div>
 				</div>
-				<div class="col-md-4"></div>
+
+				<div class="view-mail">
+					<p>{{ question.Question }}</p>
+				</div>
+				{% if question.imageName %}
+					<div class="attachment-mail">
+						<p>Cliquez pour voir la pièce Jointe</p>
+						<ul>
+							<li>
+								<a class="atch-thumb" data-toggle="modal" data-target="#exampleModalCenter">
+									<img src="{{vich_uploader_asset(question,'imageFile')}}"></a>
+
+								<!-- Modal -->
+								<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered" role="document">
+										<div class="modal-content">
+
+											<img src="{{vich_uploader_asset(question,'imageFile')}}" width="800 px"></a>
+
+									</div>
+								</div>
+							</li>
+						</div>
+					</li>
+
+				</ul>
 			</div>
+		{% endif %}
+		{% if question.Fonc %}
 			<div class="mail-sender">
 				<div class="row">
 					<div class="col-md-8">
-						De
-						<strong class="text-primary">{{ question.User }}
-							{{ question.User.Prenom }}</strong>
-						<p>[{{question.User.Mail}}
-							]</p>
+						<strong class="text-primary">{{ question.Fonc }}</strong>
+						Dans
+						<strong class="text-primary">{{ question.fonc.rout.control.appli.NomApp }}</strong>
 					</div>
 					<div class="col-md-4">
-						<p class="date">
-							<i class="fas fa-fw fa-mobile"></i>Contact :
-							{{ question.User.Contact }}</p>
+						<span>{{ question.fonc.rout.control }}/{{ question.fonc.rout.NomRout }}</span>
 					</div>
 				</div>
 			</div>
-			<div class="view-mail">
-				<p>{{ question.Question }}</p>
-				{% if question.updateAt %}
-					<div class="date ">
-						<p class="date float-right">
-							Le
-							{{ question.updateAt ? question.updateAt|date('d-m-Y à H:i') : '' }}</p>
-					</div>
-				{% else %}
-					<div class="date ">
-						<p class="date float-right">
-							Le
-							{{ question.DateQuest ? question.DateQuest|date('d-m-Y à H:i') : '' }}</p>
-					</div>
-				{% endif %}
-			</div>
-			{% if question.imageName %}
-				<div class="attachment-mail">
-					<ul>
-						<li>
-							<a class="atch-thumb" data-toggle="modal" data-target="#exampleModalCenter">
-								<img src="{{vich_uploader_asset(question,'imageFile')}}"></a>
+		{% endif %}
+		<hr class="sidebar-divider">
+
+		{% if question.Reponse %}
+
+			<div class="room-desk">
+				<div class="room-box">
+					<h5>
+						Réponse de
+						<strong class="text-primary">
+							{{ question.Responsable.Nom}}
+							{{ question.Responsable.Prenom}}</strong>
+						<span>[{{question.Responsable.Mail}}]</span>
+					</h5>
+					<p>
+						<span class="text-muted">
+							<i class="fas fa-fw fa-mobile"></i>
+							Contact :</span>
+						{{ question.Responsable.Contact }}
+						<span class="float-right text-muted">Le
+							{{ question.updateAt ? question.updateAt|date('d-m-Y à H:i') : '' }}</span>
+					</p>
+					<hr class="sidebar-divider">
+					<p> {{question.Reponse}}</p>
+						{% if question.imageR %}
+							<a class="atch-thumb" data-toggle="modal" data-target="#exampleModalCenter" href="#">
+								voir image</a>
+
 
 							<!-- Modal -->
 							<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 								<div class="modal-dialog modal-dialog-centered" role="document">
 									<div class="modal-content">
 
-										<img src="{{vich_uploader_asset(question,'imageFile')}}" width="800 px"></a>
+										<img src="{{vich_uploader_asset(question,'imageRep')}}" width="800 px"></a>
 
 								</div>
 							</div>
-						</li>
-					</div>
-
-				</li>
-			</li>
-		</ul>
-	</div>
-{% endif %}
-{% if question.Fonc %}
-	<div class="mail-sender">
-		<div class="row">
-			<div class="col-md-8">
-				<strong class="text-primary">{{ question.Fonc }}</strong>
-				Dans
-				<strong class="text-primary">{{ question.fonc.rout.control.appli.NomApp }}</strong>
-			</div>
-			<div class="col-md-4">
-				<span>{{ question.fonc.rout.control }}/{{ question.fonc.rout.NomRout }}</span>
-			</div>
-		</div>
-	</div>
-{% endif %}
-{% if question.Reponse %}
-
-	<div class="room-desk">
-		<div class="room-box">
-			<h5 class="text-primary">De
-				{{ question.Responsable.Nom}}
-				{{ question.Responsable.Prenom}}</h5>
-			<p>{{ question.Reponse }}</p>
-			{% if question.imageR %}
-				<a class="atch-thumb" data-toggle="modal" data-target="#exampleModalCenter" href="#">
-					voir l'image</a>
+						</div>
+					{% endif %}
 
 
-				<!-- Modal -->
-				<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered" role="document">
-						<div class="modal-content">
-
-							<img src="{{vich_uploader_asset(question,'imageRep')}}" width="800 px"></a>
-
-					</div>
 				</div>
 			</div>
 		{% endif %}
-		<p>
-			<span class="text-muted">
-				<i class="fas fa-fw fa-mobile"></i>
-				Contact :</span>
-			{{ question.Responsable.Contact }}
-			<span class="float-right text-muted">Le
-				{{ question.updateAt ? question.updateAt|date('d-m-Y à H:i') : '' }}</p>
-		</p>
-	</span>
-</div></div>{% endif %}{% if question.FAQ %}<div class="room-desk">
-<div class="room-box">
-	<h5 class="text-primary">Dans FAQ</h5>
-	<p>{{ question.FAQ }}</p>
-	<p>
-		<span class="text-muted">
-			<i class="fas fa-fw fa-chevron-right"></i>
-			Solution :</span>
-		{{ question.Solution }}
-	</p>
-</span></div></div>{% endif %}<div class="modal-footer"></div><div class="compose-btn"><a class="btn btn-sm " href="{{ path('app_responsable_index') }}"><i class="fa fa-arrow-left"></i>Retour</a>{% if question.Reponse %}<a class="btn btn-sm btn-theme" href="{{ path('app_question_solution', {'id': question.id}) }}">
-<i class="fa fa-share"></i>
-Modifier Réponse</a>{% else %}<a class="btn btn-sm btn-theme" href="{{ path('app_question_solution', {'id': question.id}) }}">
-<i class="fa fa-share"></i>
-Répondre</a>{% endif %}{% if question.FAQ %}<a class="btn btn-sm btn-theme" href="{{ path('app_question_FAQ_Update', {'id': question.id}) }}">
-<i class="fa fa-edit"></i>
-Modifier FAQ</a>{% endif %}{# <a class="btn btn-sm btn-theme03 " href="{{ path('app_responsable_mail', {'id': question.id}) }}">
+		{% if question.FAQ %}
+			<div class="room-desk">
+				<div class="room-box">
+					<h5 class="text-primary">Dans FAQ</h5>
+					<p>{{ question.FAQ }}</p>
+					<p>
+						<span class="text-muted">
+							<i class="fas fa-fw fa-chevron-right"></i>
+							Solution :</span>
+						{{ question.Solution }}
+					</p>
+				</span>
+			</div>
+		</div>
+	{% endif %}
+
+		{# bouton #}
+		<div class="compose-btn float-left">
+			
+			<a class="btn btn-sm " href="{{ path('app_responsable_index') }}">
+				<i class="fa fa-arrow-left"></i>Retour</a>
+			{% if question.Reponse %}
+				<a class="btn btn-sm btn-theme" href="{{ path('app_question_solution', {'id': question.id}) }}">
+					<i class="fa fa-share"></i>
+					Modifier Réponse</a>
+			{% else %}
+				<a class="btn btn-sm btn-theme" href="{{ path('app_question_solution', {'id': question.id}) }}">
+					<i class="fa fa-share"></i>
+					Répondre</a>
+			{% endif %}
+			{% if question.FAQ %}
+				<a class="btn btn-sm btn-theme" href="{{ path('app_question_FAQ_Update', {'id': question.id}) }}">
+					<i class="fa fa-edit"></i>
+					Modifier FAQ</a>
+			{% endif %}
+			<!-- Single button -->
+			<div class="btn-group">
+				<button type="button" class="btn btn-sm btn-theme02 dropdown-toggle" data-toggle="dropdown">
 					<i class="fa fa-rocket"></i>
-					vers email</a> #}<!-- Single button --><div class="btn-group"><button type="button" class="btn btn-sm btn-theme02 dropdown-toggle" data-toggle="dropdown">
-<i class="fa fa-rocket"></i>
-Transférer vers
-<span class="caret"></span></button><ul class="dropdown-menu" role="menu">
-<li>
-	<a href="{{ path('app_question_Cresponsable', {'id': question.id}) }}">Autre Responsable</a>
-</li>
-<li>
-	<a href="{{ path('app_responsable_mail', {'id':question.id }) }}">Email</a>
-</li></ul></div></div></div></div></div>{% endblock %}
+					Transférer vers
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li>
+						<a href="{{ path('app_question_Cresponsable', {'id': question.id}) }}">Autre Responsable</a>
+					</li>
+					<li>
+						<a href="{{ path('app_responsable_mail', {'id':question.id }) }}">Email</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+
+</section></div>{% endblock %}
 

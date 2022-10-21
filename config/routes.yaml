@@ -1,3 +1,8 @@
+login_check:
+    path: /login_check
+app_question_index:
+    path: /question/VosQuestions
+    controller: App\Controller\QuestionController::index
 controllers:
     resource: ../src/Controller/
     type: attribute
