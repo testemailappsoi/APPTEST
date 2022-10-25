@@ -9,68 +9,90 @@
 			<h1 class="h3 mb-0 text-gray-800">Vos Questions
 			</h1>
 		</div>
-		{% for question in app.user.questions %}
-			{% if question.Finished == null %}
-			{% if question.Reponse == null %}
-				{% set border = "border-left-danger" %}
+
+		<table id="datatable" class="table table-inbox table-hover">
+			<thead>
+				<tr>
+					<th>Référence</th>
+					<th>Question</th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th>Date</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				{% for question in app.user.questions %}
+
+					{% if question.isRead == null %}
+						{% set bold = "fw-bold" %}
+					{% else %}
+						{% set bold = "" %}
+					{% endif %}
+					<tr>
+
+						<td class="view-message  dont-show {{ bold }}">
+							<a href="{{ path('app_question_detail', {'id': question.id}) }}">{{ question.id }}</a>
+						</td>
+						<td class="view-message {{ bold }}">
+							<a href="{{ path('app_question_detail', {'id': question.id}) }}">{{ question.Question }}
+							</td>
+							{% if question.Responsable == app.user and question.Reponse == null  %}
+								<td>
+									<span class="badge bg-success float-right {{ bold }}">Pour Vous</span>
+								</td>
+							</a>
+						</td>
+					{% else %}
+						<td class="view-message  inbox-small-cells {{ bold }}"></td>
+					{% endif %}
+					{% if question.Reponse == null %}
+						<td>
+							<span class="badge bg-important float-right">sans Réponse</span>
+						</td>
+					{% elseif question.Reponse and question.isRead == null  %}
+						<td>
+							<span class="badge bg-important float-right">Modifier</span>
+						</td>
+					{% elseif question.Reponse and question.Finished == null  %}
+						<td>
+							<span class="badge bg-warning float-right">en cours</span>
+						</td>
+					{% else %}
+						<td>
+							<span class="badge bg-success float-right">Terminé</span>
+						</td>
+					{% endif %}
+					{% if question.Fonc %}
+						<td>
+							<span class="badge bg-theme float-right {{ bold }}">{{ question.fonc.rout.control.appli.NomApp }}</span>
+						</td>
+					</a>
+				</td>
 			{% else %}
-				{% set border = "border-left-warning" %}
+				<td class="view-message  inbox-small-cells {{ bold }}"></td>
 			{% endif %}
-
-			<div class="table-inbox-wrap ">
-				<table class="table table-inbox table-hover">
-					<tbody>
-						<tr class="read {{ border }}">
-							<td class="inbox-small-cells">
-								<i class="fa fa-caret-right"></td>
-							</td>
-							<td class="view-message">
-								<a href="{{ path('app_question_detail', {'id': question.id}) }}">{{ question.id }}
-								</td>
-							<td class="view-message">
-								<a href="{{ path('app_question_detail', {'id': question.id}) }}">{{ question.Question }}
-								</td>
-								{% if question.Reponse == null %}
-									<td>
-										<span class="badge bg-important float-right">sans Réponse</span>
-									</td>
-								{% elseif question.Reponse and question.Finished == null  %}
-									<td>
-										<span class="badge bg-warning float-right">en cours</span>
-									</td>
-								{% else %}
-									<td>
-										<span class="badge bg-warning float-right">Terminé</span>
-									</td>
-								{% endif %}
-								{% if question.Fonc %}
-									<td>
-										<span class="badge bg-theme float-right">{{ question.fonc.rout.control.appli.NomApp }}</span>
-									{% endif %}
-								</a>
-							</td>
-							{% if question.imageName %}
-								<td class="view-message  inbox-small-cells">
-									<i class="fa fa-paperclip"></i>
-								</td>
-							{% endif %}
-
-							{% if question.updateAt %}
-								<td class="view-message  text-right">{{ question.updateAt ? question.updateAt|date('H:i | d-m-Y') : '' }}</td>
-							{% else %}
-								<td class="view-message  text-right">{{ question.DateQuest ? question.DateQuest|date('H:i | d-m-Y') : '' }}</td>
-							{% endif %}
-						</tr>
-
-					</tbody>
-				</table>
-			</div>
+			{% if question.imageName %}
+				<td class="view-message  inbox-small-cells {{ bold }}">
+					<i class="fa fa-paperclip"></i>
+				</td>
+			{% else %}
+				<td class="view-message  inbox-small-cells {{ bold }}"></td>
 			{% endif %}
-		{% else %}
-			<h2>
-				vide
-			</h2>
-		{% endfor %}
+			{% if question.updateAt == null %}
+				<td class="view-message  text-right {{ bold }}">{{ question.DateQuest ? question.DateQuest|date('d-m-Y à H:i') : '' }}</td>
+			{% else %}
+				<td class="view-message  text-right ">{{ question.updateAt ? question.updateAt|date('d-m-Y à H:i') : '' }}</td>
+			{% endif %}
+		</tr>
+	{% else %}
+		<tr>
+			<td colspan="4">Vide</td>
+		</tr>
+	{% endfor %}
+</tbody></table>
 	</div>
 	{#  #}
 {% endblock %}

@@ -53,7 +53,7 @@ class SecurityController extends AbstractController
               $mailerService->sendEmail(
                 from: ('testemailappsoi2@gmail.com'),
                 to: $data['Email'] ,
-                subject: ('AppSoi Gestion Incident Liens de connexion temporaire:'. $url),
+                subject: ('AppSoi Gestion Incident Liens de connexion temporaire:'),
                 template:"emails/liens.html.twig",parameters:[
                     "Email" => $data['Email'],
                     "Liens" => $url ]
