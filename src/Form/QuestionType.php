@@ -20,14 +20,17 @@ class QuestionType extends AbstractType
         $builder
         
         ->add('Question', TextareaType::class, [
-            'attr' => ['row' =>5],
-            'label' => 'Votre Question',
+            'attr' => [
+                'class' => 'form-control',
+                'rows' => "5" ],
+            'label' => false,
             'constraints' => new NotBlank(['message' => 'Veillez soumettre votre question.'] )
         ] )
         ->add('Fonc', EntityType::class , [
             'class' => Fonc::class,
             'required' => false,
             'label' => 'Fonctionnalité',
+            'choice_label' => 'NomFonc',
             'placeholder' => 'Voir la liste des Fonctionnalités pour voir les noms',
             'attr' => [
                 'class' => 'select2 form-control'

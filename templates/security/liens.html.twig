@@ -4,21 +4,30 @@
 {% endblock %}
 
 {% block body %}
-	<div class="row">
-		<div class="col-6 mx-auto">
-			<h1>Liens de connexion temporaire</h1>
-      {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <div class="form-send">
-                <button type="submit" class="btn btn-large btn-primary">Envoyer</button>
-              </div>
-     {{ form_end(form) }}
-            
+
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-sm-12 col-md-5 col-lg-5">
+				<div class="card o-hidden border-0 shadow-lg my-5">
+					<div class="card-header">
+						Liens de connexion temporaire
+					</div>
+					<div class="card-body">
+						{{ form_start(form) }}
+						{{ form_widget(form) }}
+						<div class="form-send">
+							<button type="submit" class="btn btn-primary btn-user btn-block">Envoyer</button>
+						</div>
+						{{ form_end(form) }}
+						<hr>
+						<div class="text-center">
+							<a class="small" href="{{ url('app_register') }}">Créer un compte!</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
- 
+
 {% endblock %}
-
-
-
 

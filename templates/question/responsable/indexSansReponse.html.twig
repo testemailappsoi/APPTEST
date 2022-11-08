@@ -8,8 +8,8 @@
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
 			<h1 class="h3 mb-0 text-gray-800">Questions
 			</h1>
-			<a href="{{ path('app_responsable_QSR_index') }}" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm">
-				<i class="fas fa-exclamation-circle fa-sm text-white-50"></i>
+			<a href="{{ path('app_responsable_QSR_index') }}" class="d-sm-inline-block btn btn-sm btn-secondary shadow-sm">
+				<i class="fas fa-exclamation-circle fa-sm text-white-50 "></i>
 				Sans Réponse</a>
 			<a href="{{ path('app_responsable_concerner_index') }}" class="d-none d-sm-inline-block btn btn-sm btn-theme02 shadow-sm">
 				<i class="fas fa-share fa-sm text-white-50"></i>
@@ -34,7 +34,7 @@
 				{% for question in questions %}
 
 					{% if question.isRead == null %}
-						{% set bold = "fw-bold" %}
+						{% set bold = "fw-bold text-gray-900" %}
 					{% else %}
 						{% set bold = "" %}
 					{% endif %}

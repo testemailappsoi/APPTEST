@@ -4,11 +4,13 @@
 {% endblock %}
 
 {% block body %}
-	<div class="row">
+	<div class="row ">
 		<div class="col-6 mx-auto">
+		<div class="card o-hidden border-0 shadow-lg my-5">
 
-			<h1>Profil
-			</h1>
+			<div class="card-header">
+					Profil
+				</div>
 
 			<table class="table">
 				<tbody>
@@ -38,13 +40,17 @@
 						<td>
 							{% for roles in user.roles %}
 								{% if roles == "ROLE_ADMIN" %}
-									Administrateur
+									Administrateur 
+									<div class="topbar-divider d-none d-sm-block"></div>
 								{% elseif roles == "ROLE_USER" %}
-									Utilisateur
+									Utilisateur Simple
+									<div class="topbar-divider d-none d-sm-block"></div>
 								{% elseif roles == "ROLE_REP" %}
 									Responsable
+									<div class="topbar-divider d-none d-sm-block"></div>
 								{% elseif roles == "ROLE_UAPP" %}
-									Autre
+									Utilisateur d'Application
+									<div class="topbar-divider d-none d-sm-block"></div>
 								{% endif %}
 
 							{% endfor %}
@@ -60,6 +66,7 @@
 					Modifier</a>
 			</div>
 
+		</div>
 		</div>
 	</div>
 {% endblock %}

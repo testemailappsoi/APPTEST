@@ -4,14 +4,13 @@
 {% block title %}FAQ
 {% endblock %}
 {% block body %}
-
-	<div
-		class="container">
+	<div >
 		<!-- Page Heading -->
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
-			<h1 class="h3 mb-0 text-gray-800">FAQ</h1>
+			<h1 class="h3 mb-0 text-gray-800"> <i class="fa fa-angle-right"></i>FAQ</h1>
 
 		</div>
+		
 		{{ form(form) }}
 
 
@@ -24,8 +23,8 @@
 						<div class="accordion" id="accordion">
 							<div class="accordion-group">
 								<div class="accordion-heading" style="width: auto; height: 57px">
-									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ question.id }}">
-										<h6 class="m-0 font-weight-bold text-primary">
+									<a class="" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ question.id }}">
+										<h6 class="font-weight-bold text-primary">
 											<i class="fas fa-caret-right"></i>
 											{{ question.FAQ }}
 											?</h6>
@@ -59,8 +58,8 @@
 						<div class="accordion" id="accordion">
 							<div class="accordion-group">
 								<div class="accordion-heading" style="width: auto; height: 50px">
-									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ question.id }}">
-										<h6 class="m-0 font-weight-bold text-primary">
+									<a class="" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ question.id }}">
+										<h6 class="font-weight-bold text-primary">
 											<i class="fas fa-caret-right"></i>
 											{{ question.FAQ }}
 											?</h6>
@@ -87,8 +86,8 @@
 			{% endif %}
 
 
-		</div>
+	
 
-
+</div>
 	{% endblock %}
 

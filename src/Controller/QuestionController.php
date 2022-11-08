@@ -34,7 +34,7 @@ class QuestionController extends AbstractController
     #[Route('/', name: 'app_reponse_index', methods: ['GET', 'POST'])]
     public function Reponse(QuestionRepository $questionRepository, Request $request): Response
     {
-        $rechquestions = $questionRepository->findBy(['FAQ' => true], ['DateQuest' => 'ASC']);
+        $rechquestions = $questionRepository->findBy(['FAQ' => true], ['updateAt' => 'DESC']);
         $form = $this->createForm(SearchQuestionType::class);
         $search = $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

@@ -16,7 +16,10 @@ class QuestType extends AbstractType
     {
         $builder
             ->add('Question', TextareaType::class, [
-                'attr' => ['class' => 'tinymce'],
+                'attr' => [
+                    'class' => 'form-control',
+                    'rows' => "5" ],
+                'label' => false,
                 'constraints' => new NotBlank(['message' => 'Veillez soumettre votre question.'] )
             ])
             ->add('imageFile', VichImageType::class, [

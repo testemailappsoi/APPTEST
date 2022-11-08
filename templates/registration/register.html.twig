@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
 <div class="row">
+<form>
     <div class="col-6 mx-auto">
-    <h1>Register</h1>
+    <h2>Inscription</h2>
 
     {{ form_start(registrationForm) }}
 <div class="form-row">
@@ -32,5 +33,6 @@
         </div>
     {{ form_end(registrationForm) }}
    </div>
+   </form>
 </div>
 {% endblock %}

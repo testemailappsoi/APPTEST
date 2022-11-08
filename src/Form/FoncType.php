@@ -24,7 +24,10 @@ class FoncType extends AbstractType
             ->add('Autre', TextareaType::class, [
                 'required' => false,
                 'constraints' => new NotBlank,
-                'attr' => ['class' => 'tinymce'],
+                'attr' => [
+                    'class' => 'form-control',
+                    'rows' => "5" ],
+                'label' => false,
             ])
             ->add('rout', EntityType::class , [
                 'class' => Rout::class,

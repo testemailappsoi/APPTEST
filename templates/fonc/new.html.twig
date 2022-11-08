@@ -16,32 +16,3 @@
 
 {% endblock %}
 
-{% block javascripts %}
-	<script>
-		var $application = $('#fonc_Appli, #fonc_control');
-// When application gets selected ...
-$application.change(function () { // ... retrieve the corresponding form.
-var $field = $(this);
-var $applifield = $('#fonc_Appli');
-var $form = $field.closest('form');
-var target = '#' + $field.attr('id').replace("control", "rout").replace("Appli", "control")
-// Simulate form data, but only include the selected application value.
-var data = {};
-data[$applifield.attr('name')] = $applifield.val();
-data[$field.attr('name')] = $field.val();
-// Submit data via AJAX to the form's action path.
-$.ajax({
-url: $form.attr('action'),
-type: $form.attr('method'),
-data: data,
-complete: function (html) { // Replace current position field ...
-$(target).replaceWith($(html.responseText).find(target));
-// Position field now displays the appropriate positions.
-}
-});
-});
-	</script>
-
-
-{% endblock %}
-

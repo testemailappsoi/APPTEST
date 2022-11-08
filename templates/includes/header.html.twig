@@ -2,7 +2,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gray-900 sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('app_reponse_index') }}">
@@ -10,7 +10,7 @@
                     <img class="img-profile rounded-circle"
                                     src={{ asset('icons/icons8-g-key-48.png') }}>
                 </div>
-                <div class="sidebar-brand-text mx-3">Gestion Incident</div>
+                <div class="sidebar-brand-text mx-7">Incident & Problème</div>
             </a>
 
             <!-- Divider -->
@@ -28,7 +28,7 @@
             {% if is_granted('ROLE_USER') %}
             <!-- Heading -->
             <div class="sidebar-heading">
-                Utilisateur {{app.user.Nom}}
+                {{app.user.Nom}} {{app.user.Prenom}}
             </div>
 
             <!-- Nav Item - Tables -->
@@ -57,9 +57,9 @@
             {% if is_granted('ROLE_UAPP') %}
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_fonc_index') }}">
+                <a class="nav-link" href="{{ path('app_application_index') }}">
                     <i class="fas fa-fw fa-laptop"></i>
-                    <span>Fonctionnalite</span></a>
+                    <span>Application du Trésor</span></a>
             </li>
             {% endif %} 
             {% if is_granted('ROLE_REP') %}
@@ -119,11 +119,11 @@
             </li>
 
             <!-- Nav Item - Charts -->
-            {# <li class="nav-item">
-                <a class="nav-link" href="{{ url('app_question_indexG') }}">
+            <li class="nav-item">
+                <a class="nav-link"  href="{{ url('app_admin_stat') }}">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Historique</span></a>
-            </li> #}
+                    <span>Evolution</span></a>
+            </li>
             {% endif %}
 
             <!-- Divider -->
@@ -217,7 +217,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{app.user.Nom}}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{app.user.Nom}}<br>{{app.user.Prenom}}</span>
                                 <img class="img-profile rounded-circle"
                                     src={{ asset('assets/img/undraw_profile.svg') }}>
                             </a>
@@ -239,7 +239,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Déconnexion
                                 </a>
                             </div>
                         </li>

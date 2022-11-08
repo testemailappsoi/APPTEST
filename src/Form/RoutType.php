@@ -29,7 +29,10 @@ class RoutType extends AbstractType
                 'class' => Application::class,
                 'mapped' => false,
                 'required' => false,
-                'placeholder' => 'Choisir une Apllication'
+                'placeholder' => 'Choisir une Apllication',
+                'attr' => [
+                    'class' => 'select2 form-control'
+                ]
             ])
             ;
         $builder->get('Appli')->addEventListener (

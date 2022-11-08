@@ -6,8 +6,8 @@
 {% block body %}
 	<div class="container">
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
-			<h1 class="h3 mb-0 text-gray-800">Vos Questions
-			</h1>
+			<h1 class="h3 mb-0 text-gray-800"> <i class="fa fa-angle-right"></i>Vos Questions</h1>
+
 		</div>
 
 		<table id="datatable" class="table table-inbox table-hover">
@@ -25,7 +25,8 @@
 
 			<tbody>
 				{% for question in app.user.questions %}
-
+				{% if question.Finished == null  %}	
+				
 					{% if question.isRead == null %}
 						{% set bold = "fw-bold" %}
 					{% else %}
@@ -43,50 +44,48 @@
 								<td>
 									<span class="badge bg-success float-right {{ bold }}">Pour Vous</span>
 								</td>
-							</a>
-						</td>
-					{% else %}
-						<td class="view-message  inbox-small-cells {{ bold }}"></td>
-					{% endif %}
-					{% if question.Reponse == null %}
-						<td>
-							<span class="badge bg-important float-right">sans Réponse</span>
-						</td>
-					{% elseif question.Reponse and question.isRead == null  %}
-						<td>
-							<span class="badge bg-important float-right">Modifier</span>
-						</td>
-					{% elseif question.Reponse and question.Finished == null  %}
-						<td>
-							<span class="badge bg-warning float-right">en cours</span>
-						</td>
-					{% else %}
-						<td>
-							<span class="badge bg-success float-right">Terminé</span>
-						</td>
-					{% endif %}
-					{% if question.Fonc %}
-						<td>
-							<span class="badge bg-theme float-right {{ bold }}">{{ question.fonc.rout.control.appli.NomApp }}</span>
-						</td>
-					</a>
-				</td>
-			{% else %}
-				<td class="view-message  inbox-small-cells {{ bold }}"></td>
-			{% endif %}
-			{% if question.imageName %}
-				<td class="view-message  inbox-small-cells {{ bold }}">
-					<i class="fa fa-paperclip"></i>
-				</td>
-			{% else %}
-				<td class="view-message  inbox-small-cells {{ bold }}"></td>
-			{% endif %}
-			{% if question.updateAt == null %}
-				<td class="view-message  text-right {{ bold }}">{{ question.DateQuest ? question.DateQuest|date('d-m-Y à H:i') : '' }}</td>
-			{% else %}
-				<td class="view-message  text-right ">{{ question.updateAt ? question.updateAt|date('d-m-Y à H:i') : '' }}</td>
-			{% endif %}
+							</a></td>{% else %}<td class="view-message  inbox-small-cells {{ bold }}"></td>{% endif %}
+
+							{% if question.Reponse == null %}
+								<td>
+									<span class="badge bg-important float-right">sans Réponse</span>
+								</td>
+							{% elseif question.Reponse and question.isRead == null  %}
+								<td>
+									<span class="badge bg-important float-right">Modifier</span>
+								</td>
+							{% elseif question.Reponse and question.Finished == null  %}
+								<td>
+									<span class="badge bg-warning float-right">en cours</span>
+								</td>
+							{% else %}
+								<td>
+									<span class="badge bg-success float-right">Terminé</span>
+								</td>
+							{% endif %}
+
+							{% if question.Fonc %}
+								<td>
+									<span class="badge bg-theme float-right {{ bold }}">{{ question.fonc.rout.control.appli.NomApp }}</span>
+								</td>
+							</a></td>{% else %}<td class="view-message  inbox-small-cells {{ bold }}"></td>{% endif %}
+
+							{% if question.imageName %}
+								<td class="view-message  inbox-small-cells {{ bold }}">
+									<i class="fa fa-paperclip"></i>
+								</td>
+							{% else %}
+								<td class="view-message  inbox-small-cells {{ bold }}"></td>
+							{% endif %}
+
+							{% if question.updateAt == null %}
+								<td class="view-message  text-right {{ bold }}">{{ question.DateQuest ? question.DateQuest|date('d-m-Y à H:i') : '' }}</td>
+							{% else %}
+								<td class="view-message  text-right ">{{ question.updateAt ? question.updateAt|date('d-m-Y à H:i') : '' }}</td>
+							{% endif %}
+
 		</tr>
+		{% endif %}
 	{% else %}
 		<tr>
 			<td colspan="4">Vide</td>

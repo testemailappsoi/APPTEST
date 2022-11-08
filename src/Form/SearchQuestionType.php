@@ -16,7 +16,7 @@ class SearchQuestionType extends AbstractType
             ->add('mots', SearchType::class, [
                 'label' => false,
                 'attr' => [
-                    'class' => 'form-control d-sm-flex align-items-center justify-content-between mb-4',
+                    'class' => 'form-control',
                     'placeholder' => 'Mot clé...',
                     'aria-label' => 'Search'
                 ],

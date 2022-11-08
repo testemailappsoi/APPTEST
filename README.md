@@ -15,3 +15,10 @@ Dans src/Service/MailerService.php le service d'envoie d'Email , les configurati
     - pour Gmail : MAILER_DSN=gmail://testemailappsoi2@gmail.com:wwxneylcakvwxlez@default?verify_peer=0
     - dans config/packages/mailer.yaml l'addresse email d'envoi par defaut
 Dans assets/notyf.js pour la configuration du bibliothèque JavaScript Notyf , pour plus d'information https://www-npmjs-com.translate.goog/package/notyf?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=fr&_x_tr_pto=sc 
+
+SELECT count(*), SUBSTRING(date_quest, 1,10) as date_PJ FROM `question`GROUP BY date_PJ;
+
+SELECT count(*) FROM `question`WHERE finished;
+
+SELECT count(*) FROM `question`WHERE reponse = 0;
+

@@ -19,13 +19,17 @@ class FaqType extends AbstractType
                 'disabled' => true,
             ] )
             ->add('FAQ', TextareaType::class, [
-                'attr' => ['row' =>5],
-                'label' => 'Question dans FAQ',
+                'attr' => [
+                    'rows' => "5" ],
+                'label' => 'Reformulation',
                 'disabled' => false,
                 'constraints' => new NotBlank(['message' => 'Veillez soumettre une Solution.'])
             ] )
             ->add('Solution', TextareaType::class, [
-                'attr' => ['row' =>5],
+                'attr' => [
+                    'class' => 'form-control',
+                    'rows' => "5" ],
+                'label' => false,
                 'constraints' => new NotBlank(['message' => 'Veillez soumettre une Solution.'] )
             ])
         ;

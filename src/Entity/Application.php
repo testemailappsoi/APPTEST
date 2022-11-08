@@ -26,9 +26,8 @@ class Application
     #[ORM\OneToMany(mappedBy: 'appli', targetEntity: Control::class)]
     private $controls;
 
-   
-
-   
+    #[ORM\Column(type: 'string', length: 455)]
+    private $More;
 
     public function __construct()
     {
@@ -71,11 +70,6 @@ class Application
         return $this;
     }
 
-
-
-
-
-
     /**
      * @return Collection<int, Control>
      */
@@ -106,7 +100,16 @@ class Application
         return $this;
     }
 
-   
+    public function getMore(): ?string
+    {
+        return $this->More;
+    }
 
-   
+    public function setMore(string $More): self
+    {
+        $this->More = $More;
+
+        return $this;
+    }
+
 }

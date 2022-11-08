@@ -22,11 +22,11 @@ class ReponseType extends AbstractType
             ] )
             ->add('Reponse', TextareaType::class, [
                 'label'=> false,
-                'attr' => ['class' => 'wysihtml5 form-control','row' => '9'],
+                'attr' => ['class' => 'form-control', 'placeholder' => 'Votre Réponse','row' => "5"],
                 'constraints' => new NotBlank(['message' => 'Veillez soumettre votre Réponse.'] )
             ])
             ->add('User', TextType::class, [
-                'label'=> 'To :  ',
+                'label'=> 'À :  ',
                 'disabled' => true,
             ])
             ->add('imageRep', VichImageType::class,[

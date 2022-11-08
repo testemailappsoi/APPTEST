@@ -22,6 +22,7 @@ class ControlType extends AbstractType
             ->add('appli', EntityType::class , [
                 'class' => Application::class,
                 'required' => false,
+                'label' => 'Nom de Application',
                 'attr' => [
                     'class' => 'select2 form-control'
                 ]

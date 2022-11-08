@@ -23,13 +23,27 @@ class QuestionRepository extends ServiceEntityRepository
 
     public function search($mots)
     {
-        $query = $this->createQueryBuilder('a');
-        $query->where('a.id != 0');
+        $query = $this->createQueryBuilder('r');
+        $query->where('r.id != 0');
         if ($mots != null) {
-            $query->andWhere('MATCH_AGAINST(a.FAQ,a.Solution,a.Question) AGAINST (:mots boolean)>0')
+            $query->andWhere('MATCH_AGAINST(r.FAQ, r.Solution, r.Question, r.Reponse) AGAINST (:mots boolean)>0')
                 ->setParameter('mots', $mots);
         }
 
+        return $query->getQuery()->getResult();
+    }
+
+    //Groupe des question Ajouter par Jours
+    public function countByDate(){
+        $query = $this->createQueryBuilder('a')
+        ->select('SUBSTRING(a.DateQuest, 1,10) as date_PJ, COUNT(a) as count')->groupBy('date_PJ');
+        return $query->getQuery()->getResult();
+    }
+
+    //Groupe des question Terminé
+    public function countByFinished(){
+        $query = $this->createQueryBuilder('f')
+        ->select('SUBSTRING(f.updateAt, 1,10) as date_UJ, COUNT(f) as count')->where('f.Finished != 0')->groupBy('date_UJ');
         return $query->getQuery()->getResult();
     }
 

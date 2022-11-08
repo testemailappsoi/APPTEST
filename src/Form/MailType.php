@@ -15,18 +15,22 @@ class MailType extends AbstractType
     {
         $builder
             ->add('Question', TextareaType::class, [
-                'attr' => ['row' =>5],
+                'attr' => [
+                    'class' => 'wysihtml5 form-control',
+                    'rows' => "5" ],
                 'required' => false,
                 'disabled' => false,
-                'label' => 'Question',
+                'label' => false,
                 'constraints' => new NotBlank(['message' => 'Veillez soumettre votre question.'] )
             ] )
             ->add('De', TypeTextType::class, [
                 'label' => 'De (email)',
+                'attr' => ['placeholder' => 'Votre Email @gmail.com'],
                 'constraints' => new NotBlank(['message' => 'Votre Email.'] )
             ] )
             ->add('Email', TypeTextType::class, [
                 'label' => 'à (email)',
+                'attr' => ['placeholder' => 'Email du Receveur@gmail.com'],
                 'constraints' => new NotBlank(['message' => 'Votre Email.'] )
             ] )
                 ;

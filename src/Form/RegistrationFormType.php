@@ -28,6 +28,7 @@ class RegistrationFormType extends AbstractType
             'constraints' => new NotBlank(['message' => 'saisir votre Prenom.'])
         ])
         ->add('cin', TypeTextType::class , [
+            'attr' => ['placeholder' => '12 Chiffres'],
             'constraints' => [
                 new NotBlank(['message' => 'saisir votre CIN.']),
                 new Length([
@@ -39,10 +40,11 @@ class RegistrationFormType extends AbstractType
             'trim' => true,
         ] )
         ->add('Mail', TypeTextType::class , [
+            'attr' => ['placeholder' => 'exemple@gmail.com'],
             'constraints' => new NotBlank(['message' => 'saisir votre Email.'])
         ]) 
         ->add('Contact', TelType::class , [
-            'constraints' => new NotBlank(['message' => 'saisir votre Nom.'])
+            'constraints' => new NotBlank(['message' => 'saisir votre Numéro.'])
         ])
         ->add('agreeTerms', CheckboxType::class, [
             'mapped' => false,

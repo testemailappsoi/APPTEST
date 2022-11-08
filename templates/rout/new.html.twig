@@ -21,27 +21,4 @@
 		</div>
 	</div>
 {% endblock %}
-{% block javascripts %}
-
-	<script>
-		var $application = $('#rout_Appli');
-// When application gets selected ...
-$application.change(function () { // ... retrieve the corresponding form.
-var $form = $(this).closest('form');
-// Simulate form data, but only include the selected application value.
-var data = {};
-data[$application.attr('name')] = $application.val();
-// Submit data via AJAX to the form's action path.
-$.ajax({
-url: $form.attr('action'),
-type: $form.attr('method'),
-data: data,
-complete: function (html) { $('#rout_control').replaceWith($(html.responseText).find('#rout_control'));
-}
-});
-});
-	</script>
-
-
-{% endblock %}
 

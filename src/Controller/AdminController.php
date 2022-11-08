@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\AdminEditType;
+use App\Repository\QuestionRepository;
 use App\Repository\UserRepository;
 use PhpParser\Node\Stmt\TryCatch;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,6 +21,32 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
+        ]);
+    }
+
+    //Statistique des question posé par Jours
+    #[Route('/Stat', name: 'stat', methods: ['GET'])]
+    public function Stat(QuestionRepository $QuestionRep): Response
+    {
+        $questPJ = $QuestionRep->countByDate();
+        $dates = [];
+        $questionCount = [];
+        $questT = $QuestionRep->countByFinished();
+        $datesUP = [];
+        $QC = [];
+        foreach ($questT as $Update) {
+            $datesUP[] = $Update['date_UJ'];
+            $QC[] = $Update['count'];
+        }
+        foreach ($questPJ as $questC) {
+            $dates[] = $questC['date_PJ'];
+            $questionCount[] = $questC['count'];
+        }
+        return $this->render('admin/stat.html.twig', [
+            'dates' => json_encode($dates),
+            'questionCount' => json_encode($questionCount),
+            'datesUP' => json_encode($datesUP),
+            'QC' => json_encode($QC),
         ]);
     }
 

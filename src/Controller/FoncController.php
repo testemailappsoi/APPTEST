@@ -23,6 +23,38 @@ class FoncController extends AbstractController
         ]);
     }
 
+    #[Route('/SPECL', name: 'app_fonc_specl', methods: ['GET'])]
+    public function indexspecl(FoncRepository $foncRepository): Response
+    {
+        return $this->render('fonc/indexspecl.html.twig', [
+            'foncs' => $foncRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/GInventaire', name: 'app_fonc_GI', methods: ['GET'])]
+    public function indexGI(FoncRepository $foncRepository): Response
+    {
+        return $this->render('fonc/indexGI.html.twig', [
+            'foncs' => $foncRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/IncidenProbleme', name: 'app_fonc_IP', methods: ['GET'])]
+    public function indexIP(FoncRepository $foncRepository): Response
+    {
+        return $this->render('fonc/indexIP.html.twig', [
+            'foncs' => $foncRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/SIG', name: 'app_fonc_SIG', methods: ['GET'])]
+    public function indexSIG(FoncRepository $foncRepository): Response
+    {
+        return $this->render('fonc/indexSIG.html.twig', [
+            'foncs' => $foncRepository->findAll(),
+        ]);
+    }
+
     #[Route('/new', name: 'app_fonc_new', methods: ['GEt', 'POST'])]
     public function new(Request $request, FoncRepository $foncRepository): Response
     {

@@ -4,9 +4,13 @@
 {% endblock %}
 
 {% block body %}
+<section>
+      <section class="wrapper">
+		 
+		  
 	<div class="row">
 		<div class="col-6 mx-auto">
-			<h1>Question à Envoyer</h1>
+			<h2>Question à Envoyer</h2>
 
 			{{ form_start(form) }}
 			{{ form_row(form.Question) }}
@@ -19,5 +23,8 @@
 			{{ form_end(form) }}
 		</div>
 	</div>
+	</section>
+      <!-- /wrapper -->
+    </section>
 {% endblock %}
 

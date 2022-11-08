@@ -28,10 +28,10 @@ class AdminEditType extends AbstractType
             ] )
             ->add('roles', ChoiceType::class, [
                 'choices'=> [
-                    'Utilisateur' => 'ROLE_USER' ,
+                    'Utilisateur Simple' => 'ROLE_USER' ,
                     'Responsable' => 'ROLE_REP' ,
                     'Administrateur' => 'ROLE_ADMIN' ,
-                    'Autre' => 'ROLE_UAPP'   
+                    'Utilisateur d\'Application' => 'ROLE_UAPP'   
                 ],
                 'expanded' => true ,
                 'multiple' => true ,

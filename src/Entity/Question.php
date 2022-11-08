@@ -10,7 +10,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
 #[Vich\Uploadable]
-#[ORM\Index(columns: ['question', 'faq', 'solution'], flags: ['fulltext'])]
+#[ORM\Index(columns: ['faq', 'solution','question', 'reponse'], flags: ['fulltext'])]
 class Question
 {
     #[ORM\Id]
@@ -44,7 +44,7 @@ class Question
     #[ORM\Column(type: 'string', nullable: true)]
     private $imageName;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 455, nullable: true)]
     private $Reponse;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'R')]
@@ -55,13 +55,13 @@ class Question
     #[Gedmo\Timestampable(on: 'update')]
     private $updateAt;
 
-    #[ORM\Column(type: 'string', length: 355, nullable: true)]
+    #[ORM\Column(type: 'string', length: 455, nullable: true)]
     private $FAQ;
 
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $Finished = false;
 
-    #[ORM\Column(type: 'string', length: 355, nullable: true)]
+    #[ORM\Column(type: 'string', length: 555, nullable: true)]
     private $Solution;
 
     #[ORM\Column(type: 'boolean')]
